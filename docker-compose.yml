@@ -4,19 +4,8 @@ services:
       context: ./frontend
     volumes:
       - frontend_dist:/app/dist
-    networks:
-      - matcha
-
-  nginx:
-    build:
-      context: ./nginx
     ports:
-      - "8443:443"
-    depends_on:
-      - frontend
-    volumes:
-      - frontend_dist:/usr/share/nginx/html:ro
-    restart: always
+      - "8443:8443"
     networks:
       - matcha
 
