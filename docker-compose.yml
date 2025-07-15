@@ -1,0 +1,30 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - frontend_dist:/app/dist
+    networks:
+      - matcha
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "8443:443"
+    depends_on:
+      - frontend
+    volumes:
+      - frontend_dist:/usr/share/nginx/html:ro
+    restart: always
+    networks:
+      - matcha
+
+volumes:
+  frontend_dist:
+
+networks:
+  nginx_data:
+    driver: local
+  matcha:
+    driver: bridge
