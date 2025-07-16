@@ -84,7 +84,7 @@ export function RegisterForm({
           <CardContent className="grid md:grid-cols-2 p-0">
             <div className="hidden md:block relative bg-muted">
               <img
-                src="/matcha.png"
+                src="src/assets/matcha.png"
                 alt="Matcha"
                 className="absolute inset-0 w-full h-full object-cover"
               />
