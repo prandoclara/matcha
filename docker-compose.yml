@@ -9,11 +9,53 @@ services:
     networks:
       - matcha
 
+  auth-service:
+    build:
+      context: ./backend/auth
+    ports:
+      - "8001:8000"
+    depends_on:
+      - postgres
+    env_file:
+      - ./backend/auth/.env
+    command: >
+      sh -c "sleep 5 && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    networks:
+      - matcha
+
+  # user-service:
+  #   build:
+  #     context: ./backend/user
+  #   ports:
+  #     - "8002:8000"
+  #   networks:
+  #     - matcha
+
+  # match-service:
+  #   build:
+  #     context: ./backend/match
+  #   ports:
+  #     - "8003:8000"
+  #   networks:
+  #     - matcha
+
+  postgres:
+    build:
+      context: ./backend/postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - matcha
+
 volumes:
   frontend_dist:
+  pgdata:
 
 networks:
-  nginx_data:
-    driver: local
   matcha:
     driver: bridge
