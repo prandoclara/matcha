@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 
 interface RegisterData {
   email: string;
+  username: string;
   firstname: string;
   lastname: string;
   password: string;
@@ -26,6 +27,7 @@ export function RegisterForm({
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
+    username: "",
     firstname: "",
     lastname: "",
     password: "",
@@ -47,6 +49,7 @@ export function RegisterForm({
 
     const userData: RegisterData = {
       email: formData.email,
+      username: formData.username,
       firstname: formData.firstname,
       lastname: formData.lastname,
       password: formData.password,
@@ -107,6 +110,17 @@ export function RegisterForm({
                     type="email"
                     placeholder="m@example.com"
                     value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="username">Username</Label>
+                  <Input
+                    id="username"
+                    type="text"
+                    placeholder="Jean123"
+                    value={formData.username}
                     onChange={handleChange}
                     required
                   />
