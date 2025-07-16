@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import matchaImg from "@/assets/matcha.png";
 
 export function LoginForm({
   className,
@@ -66,9 +67,9 @@ export function LoginForm({
           <CardContent className="grid md:grid-cols-2 p-0 min-h-[500px] md:min-h-[600px]">
             <div className="hidden md:block relative bg-muted">
               <img
-                src="src/assets/matcha.png"
-                alt="Matcha"
-                className="absolute inset-0 w-full h-full object-cover"
+                  src={matchaImg}
+                  alt="Matcha"
+                  className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
             <form

@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import matchaImg from "@/assets/matcha.png";
+
 
 interface RegisterData {
   email: string;
@@ -87,10 +89,10 @@ export function RegisterForm({
           <CardContent className="grid md:grid-cols-2 p-0">
             <div className="hidden md:block relative bg-muted">
               <img
-                src="src/assets/matcha.png"
-                alt="Matcha"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+                  src={matchaImg}
+                  alt="Matcha"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
             </div>
 
             <form
