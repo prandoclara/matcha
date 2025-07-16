@@ -5,3 +5,4 @@ sqlalchemy
 asyncpg
 passlib[bcrypt]
 pydantic[email]
+bcrypt==4.0.1
