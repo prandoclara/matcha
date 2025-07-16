@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -11,16 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { registerUser } from "@/api/register";
 import matchaImg from "@/assets/matcha.png";
-
-
-interface RegisterData {
-  email: string;
-  username: string;
-  firstname: string;
-  lastname: string;
-  password: string;
-}
 
 export function RegisterForm({
   className,
@@ -49,25 +41,14 @@ export function RegisterForm({
       return;
     }
 
-    const userData: RegisterData = {
-      email: formData.email,
-      username: formData.username,
-      firstname: formData.firstname,
-      lastname: formData.lastname,
-      password: formData.password,
-    };
-
     try {
-      const response = await fetch("http://localhost:8001/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+      await registerUser({
+        email: formData.email,
+        username: formData.username,
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        password: formData.password,
       });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || "Registration failed");
-      }
 
       alert("Account created! You can now log in.");
       navigate("/login");
@@ -78,21 +59,18 @@ export function RegisterForm({
 
   return (
     <div
-      className={cn(
-        "min-h-screen flex items-center justify-center p-4",
-        className
-      )}
+      className={cn("min-h-screen flex items-center justify-center p-4", className)}
       {...props}
     >
       <div className="w-full max-w-3xl">
         <Card className="overflow-hidden">
           <CardContent className="grid md:grid-cols-2 p-0">
             <div className="hidden md:block relative bg-muted">
-              <img
-                  src={matchaImg}
-                  alt="Matcha"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+             <img
+                src={matchaImg}
+                alt="Matcha"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
 
             <form
@@ -116,17 +94,19 @@ export function RegisterForm({
                     required
                   />
                 </div>
+
                 <div className="grid gap-2">
                   <Label htmlFor="username">Username</Label>
                   <Input
                     id="username"
                     type="text"
-                    placeholder="Jean123"
+                    placeholder="jdupont"
                     value={formData.username}
                     onChange={handleChange}
                     required
                   />
                 </div>
+
                 <div className="grid gap-2">
                   <Label htmlFor="firstname">First Name</Label>
                   <Input
@@ -138,6 +118,7 @@ export function RegisterForm({
                     required
                   />
                 </div>
+
                 <div className="grid gap-2">
                   <Label htmlFor="lastname">Last Name</Label>
                   <Input
@@ -149,6 +130,7 @@ export function RegisterForm({
                     required
                   />
                 </div>
+
                 <div className="grid gap-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
@@ -160,6 +142,7 @@ export function RegisterForm({
                     required
                   />
                 </div>
+
                 <div className="grid gap-2">
                   <Label htmlFor="confirmPassword">Confirm Password</Label>
                   <Input
@@ -171,6 +154,7 @@ export function RegisterForm({
                     required
                   />
                 </div>
+
                 <Button type="submit" className="w-full mt-2">
                   Create Account
                 </Button>

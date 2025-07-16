@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import matchaImg from "@/assets/matcha.png";
+import { loginUser } from "@/api/login";
 
 export function LoginForm({
   className,
@@ -29,28 +30,12 @@ export function LoginForm({
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8001/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.detail || "Login failed");
-        return;
-      }
-
-      const userData = await response.json();
+      const userData = await loginUser({ username, password });
       console.log("Logged in user:", userData);
-      // 👉 Ex: stocke token, redirige, etc.
-      // localStorage.setItem("token", userData.token);
-      // navigate("/dashboard");
-    } catch (error) {
+    } 
+    catch (error: any) {
       console.error("Login error:", error);
-      alert("An error occurred during login.");
+      alert(error.message || "An error occurred during login.");
     }
   };
 
@@ -67,9 +52,9 @@ export function LoginForm({
           <CardContent className="grid md:grid-cols-2 p-0 min-h-[500px] md:min-h-[600px]">
             <div className="hidden md:block relative bg-muted">
               <img
-                  src={matchaImg}
-                  alt="Matcha"
-                  className="absolute inset-0 w-full h-full object-cover"
+                src={matchaImg}
+                alt="Matcha"
+                className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
             <form
@@ -82,9 +67,6 @@ export function LoginForm({
                   Login with your Apple or Google account
                 </CardDescription>
               </CardHeader>
-
-              {/* Social buttons (unchanged) */}
-              {/* ... */}
 
               <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:border-t after:border-border">
                 <span className="relative z-10 bg-background px-2 text-muted-foreground">
@@ -148,3 +130,4 @@ export function LoginForm({
     </div>
   );
 }
+
