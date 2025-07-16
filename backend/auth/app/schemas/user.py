@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr
 
 class UserCreate(BaseModel):
     email: EmailStr
+    username: str
     firstname: str
     lastname: str
     password: str
@@ -9,6 +10,7 @@ class UserCreate(BaseModel):
 class UserOut(BaseModel):
     id: int
     email: EmailStr
+    username: str
     firstname: str
     lastname: str
 
@@ -18,6 +20,6 @@ class UserOut(BaseModel):
 from pydantic import BaseModel, EmailStr
 
 class UserLogin(BaseModel):
-    firstname: str
+    username: str
     password: str
 
