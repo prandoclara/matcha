@@ -4,9 +4,9 @@ Application de rencontre (web) basée sur une architecture microservices.
 
 ## Stack technique
 
-- **Backend** : Node.js + Express (microservices)
+- **Backend** : FastAPI (microservices)
 - **Frontend** : React
-- **Base de données** : MySQL
+- **Base de données** : PostgreSQL
 - **Reverse proxy** : Nginx
 - **Orchestration** : Docker Compose
 
