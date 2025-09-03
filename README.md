@@ -58,8 +58,4 @@ Chaque microservice possède son propre dossier, Dockerfile, et fichier d'enviro
 
 ## Base de données
 
-- MySQL, persistée dans un volume Docker
-
----
-
-Tu peux maintenant développer chaque microservice et le frontend indépendamment !
+- PostgreSQL, persistée dans un volume Docker
